@@ -1,10 +1,21 @@
-﻿namespace WebAppRipetizione.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace WebAppRipetizione.Models
 {
     public class Post
     {
         public int Id { get; set; }
+
+        [Required(ErrorMessage="Il campo titolo è obbligatorio")]
+        [StringLength(100, ErrorMessage="Il titolo non può avere più di 100 caratteri")]
         public string Title { get; set; }
+
+        [Required(ErrorMessage = "Il campo descrizione è obbligatorio")]
         public string Description { get; set; }
+
+        [Required(ErrorMessage = "L'URL dell'immagine è obbligatorio")]
+        [Url(ErrorMessage ="L'Url inserito non è valido")]
+
         public string Image { get; set; }
 
 
