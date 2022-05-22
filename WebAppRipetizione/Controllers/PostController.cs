@@ -34,5 +34,28 @@ namespace WebAppRipetizione.Controllers
                 }
             
         }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Create(Post nuovoPost)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View("ErrorePost");
+            }
+
+            Post nuovoPostConId = new Post(PostData.GetPosts().Count, nuovoPost.Title, nuovoPost.Description, nuovoPost.Image);
+
+            PostData.GetPosts().Add(nuovoPostConId);
+
+            return RedirectToAction("HomePage");
+
+        }
+
+        [HttpGet]
+        public IActionResult Create()
+        {
+            return View("FormPost");
+        }
     }
 }
